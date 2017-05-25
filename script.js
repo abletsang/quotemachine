@@ -1,12 +1,13 @@
 var colours = ['#DC4C46', '#672E3B', '#F3D6E4', '#005960', '#EDCDC2'];
-var $quote = $('.quote');
+var $quote = $('.quoteDisplay');
 var $author = $('.author');
-
-
 
 $(".newquote").on("click", function() {
 	var newColour = randomColour();
-	$("body").css("background", newColour);
+	$('body').css("background-color", newColour);
+	$.getJSON( "https://api.whatdoestrumpthink.com/api/v1/quotes/random", function(data) {
+		$quote.text(data.message);
+		});
 });
 
 function randomColour() {
