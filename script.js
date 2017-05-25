@@ -2,12 +2,20 @@ var colours = ['#DC4C46', '#672E3B', '#F3D6E4', '#005960', '#EDCDC2'];
 var $quote = $('.quoteDisplay');
 var $author = $('.author');
 
-$(".newquote").on("click", function() {
-	var newColour = randomColour();
-	$('body').css("background-color", newColour);
+
+function newQuote() {
+	$('body').css("background-color", randomColour());
 	$.getJSON( "https://api.whatdoestrumpthink.com/api/v1/quotes/random", function(data) {
 		$quote.text(data.message);
-		});
+	});
+}
+
+$(document).ready(function() {
+	newQuote();
+});
+
+$(".newquote").on("click", function() {
+	newQuote();
 });
 
 function randomColour() {
