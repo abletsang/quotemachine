@@ -1,12 +1,10 @@
-var colours = ['#DC4C46', '#672E3B', '#F3D6E4', '#005960', '#EDCDC2'];
-var $quote = $('.quoteDisplay');
-var $author = $('.author');
+
 
 
 function newQuote() {
 	$('body').css("background-color", randomColour());
 	$.getJSON( "https://api.whatdoestrumpthink.com/api/v1/quotes/random", function(data) {
-		$quote.text(data.message);
+		$('.quoteDisplay').text(data.message);
 	});
 }
 
@@ -14,9 +12,18 @@ $(document).ready(function() {
 	newQuote();
 });
 
-$(".newquote").on("click", function() {
+$('.newquote').on("click", function() {
 	newQuote();
 });
+
+$('.fa-twitter-square').on("click", function() {
+	var twitUrl = "https://twitter.com/intent/tweet?text=" + $('.quoteDisplay').text() + " - Donald Trump";
+	console.log($('.fa-twitter-square').attr("href", twitUrl));
+});
+
+// <a class="twitter-share-button"
+//   href="https://twitter.com/intent/tweet?text=Hello%20world">
+// Tweet</a>
 
 function randomColour() {
 	var r = Math.floor(Math.random() * 255 + 1);
